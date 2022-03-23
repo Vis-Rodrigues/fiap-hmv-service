@@ -39,6 +39,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/dados/{id}")
+	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public UsuarioDadosDTO buscarDadosPorId(@PathVariable Long id) {
 		return usuarioService.buscarDadosPorId(id);
 	}
