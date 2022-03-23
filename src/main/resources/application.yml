@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://fiap-hmv-rds.c58opdfzcmir.us-east-1.rds.amazonaws.com:5433/fiaphmv
+    username: fiap_hmv_appl
+    password: XfWirJdAh8laedf5
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQL81Dialect
