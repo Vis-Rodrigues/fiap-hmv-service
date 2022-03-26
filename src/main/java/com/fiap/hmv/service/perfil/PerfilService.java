@@ -10,5 +10,6 @@ public interface PerfilService {
 	
 	List<PerfilDTO> listarPorUsuario(Long id);
 	List<Perfil> cadastrarPerfis(List<String> lsDTOs, Usuario usuario);
+	List<PerfilDTO> convertToListPerfilDTO(List<Perfil> cadastrarPerfis);
 
 }

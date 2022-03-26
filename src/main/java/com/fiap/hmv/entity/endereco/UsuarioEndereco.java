@@ -1,4 +1,4 @@
-package com.fiap.hmv.entity.usuario;
+package com.fiap.hmv.entity.endereco;
 
 import java.util.Calendar;
 
@@ -16,8 +16,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fiap.hmv.entity.endereco.Endereco;
 import com.fiap.hmv.entity.estabelecimento.Estabelecimento;
+import com.fiap.hmv.entity.usuario.Usuario;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

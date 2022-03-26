@@ -12,4 +12,7 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 
 	@Query("select e from Endereco e inner join UsuarioEndereco ase on ase.endereco.id = e.id where ase.usuario.id = :id")
 	List<Endereco> buscarEnderecosPorUsuario(@Param("id") Long id);
+	
+	@Query("select e from Endereco e inner join UsuarioEndereco ase on ase.endereco.id = e.id where ase.estabelecimento.id = :id")
+	List<Endereco> buscarEnderecosPorEstabelecimento(@Param("id") Long id);
 }

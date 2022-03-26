@@ -24,19 +24,24 @@ public class PerfilServiceImpl implements PerfilService {
 	public List<PerfilDTO> listarPorUsuario(Long usuarioId) {
 		List<Perfil> lst = perfilRepository.findAllByUsuarioId(usuarioId);
 		
-		return lst.stream()
-				.map(perfil -> new PerfilDTO(perfil))
-				.collect(Collectors.toList());
+		return convertToListPerfilDTO(lst);
 	}
 
 	@Override
 	public List<Perfil> cadastrarPerfis(List<String> lstDTOs, Usuario usuario) {
 		List<Perfil> lstPerfis = new ArrayList<Perfil>();
 		for (String perfil: lstDTOs) {
-			lstPerfis.add(new Perfil(perfil, usuario));
+			lstPerfis.add(new Perfil(perfil.toLowerCase(), usuario));
 		}
 		lstPerfis = perfilRepository.saveAll(lstPerfis);
 		return lstPerfis;
+	}
+	
+	@Override
+	public List<PerfilDTO> convertToListPerfilDTO(List<Perfil> perfis){
+		return perfis.stream()
+				.map(perfil -> new PerfilDTO(perfil))
+				.collect(Collectors.toList());
 	}
 
 }

@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum ETipoPerfil {
-	medico("Médico"),
-	paciente("Paciente"),
-	socorrista("Socorrista");
+	MEDICO("medico"),
+	PACIENTE("paciente"),
+	SOCORRISTA("socorrista");
 	
 	private String descricao;
 	
@@ -20,7 +20,7 @@ public enum ETipoPerfil {
 	
 	public static ETipoPerfil getTipoPorDescricao(String descricao) {
         Optional<ETipoPerfil> type = Arrays.asList(ETipoPerfil.values()).stream()
-                .filter(o -> o.getDescricao() == (descricao)).findFirst();
+                .filter(o -> o.getDescricao().equalsIgnoreCase(descricao)).findFirst();
 
         return type.isPresent() ? type.get() : null;
     }

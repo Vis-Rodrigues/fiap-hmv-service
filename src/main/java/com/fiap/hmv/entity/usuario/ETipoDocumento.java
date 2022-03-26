@@ -20,7 +20,7 @@ public enum ETipoDocumento {
 	
 	public static ETipoDocumento getTipoDocByDescricao(String descricao) {
         Optional<ETipoDocumento> type = Arrays.asList(ETipoDocumento.values()).stream()
-                .filter(o -> o.getDescricao() == (descricao)).findFirst();
+                .filter(o -> o.getDescricao().equalsIgnoreCase(descricao)).findFirst();
 
         return type.isPresent() ? type.get() : null;
     }

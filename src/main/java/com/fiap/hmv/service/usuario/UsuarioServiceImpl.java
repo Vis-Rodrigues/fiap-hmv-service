@@ -12,7 +12,6 @@ import com.fiap.hmv.model.dto.endereco.EnderecoDTO;
 import com.fiap.hmv.model.dto.perfil.PerfilDTO;
 import com.fiap.hmv.model.dto.usuario.NovoUsuarioDTO;
 import com.fiap.hmv.model.dto.usuario.UsuarioDTO;
-import com.fiap.hmv.model.dto.usuario.UsuarioDadosDTO;
 import com.fiap.hmv.repository.UsuarioRepository;
 import com.fiap.hmv.service.endereco.EnderecoService;
 import com.fiap.hmv.service.perfil.PerfilService;
@@ -44,12 +43,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public UsuarioDTO cadastrar(NovoUsuarioDTO novoUsuarioDTO) {
 		Usuario usuario = new Usuario(novoUsuarioDTO);
 		Usuario usuarioSalvo = usuarioRepository.save(usuario);
-		cadastrarPerfis(novoUsuarioDTO.getPerfis(), usuarioSalvo);
+		List<PerfilDTO> perfis = cadastrarPerfis(novoUsuarioDTO.getPerfis(), usuarioSalvo);
 		if(novoUsuarioDTO.getEnderecos()!=null && !novoUsuarioDTO.getEnderecos().isEmpty()) {
 			cadastrarEndereco(novoUsuarioDTO.getEnderecos(), usuarioSalvo);			
 		}
 		
-		return new UsuarioDTO(usuarioSalvo, novoUsuarioDTO.getEnderecos(), novoUsuarioDTO.getPerfis());
+		return new UsuarioDTO(usuarioSalvo, novoUsuarioDTO.getEnderecos(), perfis);
 	}
 
 	@Override
@@ -68,18 +67,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	
 	private void cadastrarEndereco(List<EnderecoDTO> lstEnderecos, Usuario usuario) {
-		enderecoService.cadastrarListaEndereco(lstEnderecos, usuario);
+		enderecoService.cadastrarListaEnderecoUsuario(lstEnderecos, usuario);
 	}
 	
-	private void cadastrarPerfis(List<String> lstPerfis, Usuario usuario) {
-		perfilService.cadastrarPerfis(lstPerfis, usuario);
+	private List<PerfilDTO> cadastrarPerfis(List<String> lstPerfis, Usuario usuario) {
+		return perfilService.convertToListPerfilDTO(perfilService.cadastrarPerfis(lstPerfis, usuario));
 	}
 
 	@Override
-	public UsuarioDadosDTO buscarDadosPorId(Long id) {
+	public UsuarioDTO buscarDadosPorId(Long id) {
 		Usuario usuario = buscar(id);
 		List<PerfilDTO> lstPerfis = perfilService.listarPorUsuario(id);
-		UsuarioDadosDTO dto = new UsuarioDadosDTO(usuario, lstPerfis);
+		List<EnderecoDTO> lstEnderecos = enderecoService.buscarEnderecosPorUsuario(id);
+		UsuarioDTO dto = new UsuarioDTO(usuario, lstEnderecos, lstPerfis);
 		return dto;
 	}
 

@@ -6,6 +6,7 @@ import java.util.List;
 import com.fiap.hmv.entity.usuario.ETipoDocumento;
 import com.fiap.hmv.entity.usuario.Usuario;
 import com.fiap.hmv.model.dto.endereco.EnderecoDTO;
+import com.fiap.hmv.model.dto.perfil.PerfilDTO;
 
 import lombok.Data;
 
@@ -23,7 +24,7 @@ public class UsuarioDTO {
 	protected Calendar dtCriacao;
 	protected Calendar dtAtualizacao;
 	private List<EnderecoDTO> enderecos;
-	private List<String> lstPerfis;
+	private List<PerfilDTO> perfis;
 	
 	public UsuarioDTO(Usuario usuario) {
 		this.id = usuario.getId();
@@ -38,7 +39,7 @@ public class UsuarioDTO {
 		this.dtEmailVerificado = usuario.getDtEmailVerificado();
 	}
 	
-	public UsuarioDTO(Usuario usuario, List<EnderecoDTO> lstEnderecos, List<String> perfis) {
+	public UsuarioDTO(Usuario usuario, List<EnderecoDTO> lstEnderecos, List<PerfilDTO> perfis) {
 		this.id = usuario.getId();
 		this.nome = usuario.getNome();
 		this.email = usuario.getEmail();
@@ -50,7 +51,7 @@ public class UsuarioDTO {
 		this.dtAtualizacao = usuario.getDtAtualizacao();
 		this.dtEmailVerificado = usuario.getDtEmailVerificado();
 		this.enderecos = lstEnderecos;
-		this.lstPerfis = perfis;
+		this.perfis = perfis;
 	}
 
 }
