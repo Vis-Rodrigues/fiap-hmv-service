@@ -88,7 +88,7 @@ public class Usuario implements Serializable{
 		this.docNumero = novo.getDocNumero();
 		this.foto = novo.getFoto();
 		this.ativo = true;
-		this.senha = "trocar@123";
+		this.senha = novo.getSenha();
 	}
 	
 }

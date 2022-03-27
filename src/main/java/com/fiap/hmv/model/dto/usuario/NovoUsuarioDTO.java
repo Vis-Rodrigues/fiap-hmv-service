@@ -37,6 +37,10 @@ public class NovoUsuarioDTO {
     @Size(max = 300, message = "O campo foto pode ter até 300 caracteres.")
 	private String foto;
     
+    @NotBlank(message = "O campo senha é obrigatório.")
+    @Size(max = 20, min = 5, message = "O campo senha deve ter entre 5 e 20 caracteres.")
+	private String senha;
+    
 	private List<EnderecoDTO> enderecos;
 	private List<String> perfis;
 

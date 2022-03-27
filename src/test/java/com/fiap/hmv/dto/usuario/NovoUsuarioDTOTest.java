@@ -19,6 +19,7 @@ public class NovoUsuarioDTOTest {
 	private ETipoDocumento docTipo;
 	private String docNumero;
 	private String foto;
+	private String senha;
 	private List<EnderecoDTO> enderecos;
 	private List<String> perfis;
 	
@@ -29,13 +30,14 @@ public class NovoUsuarioDTOTest {
     	docTipo = ETipoDocumento.CPF;
     	docNumero = "42345058743";
     	foto = "https://picsum.photos/id/289/200";
+    	senha = "Trocar@123";
     	enderecos = Arrays.asList(new EnderecoDTO("Clinica Fiap", "Lins de Vasconcelos", "Avenida", "06266080", "1144", "São Paulo", "SP","Brasil", "torre B"));
     	perfis = Arrays.asList("paciente");
 	}
 	
 	@Test
     public void verificarConstrutorPreenchido() {
-		NovoUsuarioDTO mock = new NovoUsuarioDTO(nome, email, docTipo, docNumero, foto, enderecos, perfis);
+		NovoUsuarioDTO mock = new NovoUsuarioDTO(nome, email, docTipo, docNumero, foto, senha, enderecos, perfis);
     	verfificarValoresDefault(mock);
     }
     
@@ -49,6 +51,7 @@ public class NovoUsuarioDTOTest {
     	novo.setEnderecos(enderecos);
     	novo.setFoto(foto);
     	novo.setPerfis(perfis);
+    	novo.setSenha(senha);
     	verfificarValoresDefault(novo);
     }
     

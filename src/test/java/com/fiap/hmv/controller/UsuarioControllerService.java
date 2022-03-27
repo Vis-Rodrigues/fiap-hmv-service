@@ -164,7 +164,6 @@ public class UsuarioControllerService {
 		NovoUsuarioDTO novo = getNovoUsuarioMock();
 		novo.setDocNumero(null);
 		validarExcecao(novo, "O campo docNumero é obrigatório.");
-		
 	}
 	
 	@Test
@@ -172,6 +171,27 @@ public class UsuarioControllerService {
 		NovoUsuarioDTO novo = getNovoUsuarioMock();
 		novo.setNome("   ");
 		validarExcecao(novo, "O campo nome é obrigatório.");
+	}
+	
+	@Test
+	public void verificarRetornoDeErroAoCadastrarComSenhaAbaixoDoLimite() {
+		NovoUsuarioDTO novo = getNovoUsuarioMock();
+		novo.setSenha("Troc");
+		validarExcecao(novo, "O campo senha deve ter entre 5 e 20 caracteres.");
+	}
+	
+	@Test
+	public void verificarRetornoDeErroAoCadastrarComSenhaAcimaDoLimite() {
+		NovoUsuarioDTO novo = getNovoUsuarioMock();
+		novo.setSenha("TrocarSenhaTeste@123455665");
+		validarExcecao(novo, "O campo senha deve ter entre 5 e 20 caracteres.");
+	}
+	
+	@Test
+	public void verificarRetornoDeErroAoCadastrarSemSenha() {
+		NovoUsuarioDTO novo = getNovoUsuarioMock();
+		novo.setSenha(null);
+		validarExcecao(novo, "O campo senha é obrigatório.");
 		
 	}
 	
@@ -184,7 +204,7 @@ public class UsuarioControllerService {
 	private NovoUsuarioDTO getNovoUsuarioMock() {
 		List<String> perfisStr = new ArrayList<>();
 		perfisStr.add(ETipoPerfil.PACIENTE.getDescricao());
-		return new NovoUsuarioDTO(usuarioDTO.getNome(), usuarioDTO.getEmail(), usuarioDTO.getDocTipo(), usuarioDTO.getDocNumero(), usuarioDTO.getFoto(), enderecos, perfisStr);
+		return new NovoUsuarioDTO(usuarioDTO.getNome(), usuarioDTO.getEmail(), usuarioDTO.getDocTipo(), usuarioDTO.getDocNumero(), usuarioDTO.getFoto(), "Trocar@123", enderecos, perfisStr);
 	}
 
 }
