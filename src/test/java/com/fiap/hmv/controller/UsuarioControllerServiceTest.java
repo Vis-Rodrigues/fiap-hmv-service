@@ -43,7 +43,7 @@ import com.fiap.hmv.service.usuario.UsuarioService;
 @AutoConfigureMockMvc
 @SpringBootTest
 @ActiveProfiles("test")
-public class UsuarioControllerService {
+public class UsuarioControllerServiceTest {
 	
 	@Mock
 	private UsuarioService usuarioService;
